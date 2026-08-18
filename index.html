@@ -370,14 +370,100 @@ function loginAccount() {
 }
 
 function showAI() {
+
   document.getElementById("app").innerHTML =
     "<div class='box'>" +
     "<h2>🤖 Nova AI</h2>" +
-    "<p>Hi! I'm Nova AI. Ask me what you want to find.</p>" +
-    "<input id='question' placeholder='Ask Nova AI...'>" +
-    "<button class='buy' onclick='askAI()'>Ask Nova</button>" +
+    "<p>Hi! I'm Nova, your Nova Market assistant.</p>" +
+
+    "<input id='question' placeholder='Ask Nova anything...'>" +
+
+    "<button class='buy' onclick='askNova()'>" +
+    "Ask Nova 🤖" +
+    "</button>" +
+
     "<div class='message' id='answer'></div>" +
     "</div>";
+}
+
+
+function askNova() {
+
+  var question =
+    document.getElementById("question").value.toLowerCase();
+
+  var answer =
+    "I'm Nova AI 🤖. Try asking me about phones, laptops, headphones, shoes, school products, prices, or shopping.";
+
+
+  if (question.includes("hello") ||
+      question.includes("hi")) {
+
+    answer =
+      "Hello! 👋 I'm Nova, your shopping assistant. What are you looking for?";
+  }
+
+
+  else if (question.includes("phone")) {
+
+    answer =
+      "📱 We currently have a Smart Phone listed for 15,000 Birr. I can help you compare it with other phones when more products are added.";
+  }
+
+
+  else if (question.includes("laptop")) {
+
+    answer =
+      "💻 Our featured Laptop is listed at 35,000 Birr. It's a good option to consider for school and work.";
+  }
+
+
+  else if (question.includes("headphone")) {
+
+    answer =
+      "🎧 We have Wireless Headphones listed for 1,500 Birr.";
+  }
+
+
+  else if (question.includes("shoe")) {
+
+    answer =
+      "👟 We have Running Shoes listed for 2,800 Birr.";
+  }
+
+
+  else if (question.includes("school")) {
+
+    answer =
+      "📚 For school, I can help you look for laptops, phones, headphones, stationery, and other useful products.";
+  }
+
+
+  else if (question.includes("cheap") ||
+           question.includes("cheapest")) {
+
+    answer =
+      "💰 Our lowest-priced featured product is currently the Wireless Headphones at 1,500 Birr.";
+  }
+
+
+  else if (question.includes("cart")) {
+
+    answer =
+      "🛒 You can use the Cart button at the top to see products you've added.";
+  }
+
+
+  else if (question.includes("who are you") ||
+           question.includes("what are you")) {
+
+    answer =
+      "🤖 I'm Nova AI, the shopping assistant built into Nova Market!";
+  }
+
+
+  document.getElementById("answer").innerHTML = answer;
+}
 }
 
 function askAI() {
