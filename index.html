@@ -1,324 +1,595 @@
+> Tegist:
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Nova Market</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nova Market</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+<style>
+* {
+  box-sizing: border-box;
+}
 
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f5f7fb;
-      color: #172033;
-    }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f6f9;
+  color: #172033;
+}
 
-    header {
-      background: #111827;
-      color: white;
-      padding: 18px 5%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
+header {
+  background: #111827;
+  color: white;
+  padding: 15px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
 
-    .logo {
-      font-size: 25px;
-      font-weight: bold;
-    }
+.top {
+  max-width: 1100px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
 
-    nav button {
-      background: transparent;
-      color: white;
-      border: 0;
-      padding: 9px 12px;
-      cursor: pointer;
-      font-size: 15px;
-    }
+.logo {
+  font-size: 25px;
+  font-weight: bold;
+}
 
-    .hero {
-      padding: 55px 20px;
-      text-align: center;
-      background: white;
-    }
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
 
-    .hero h1 {
-      font-size: 40px;
-      margin: 10px;
-    }
+button {
+  border: 0;
+  border-radius: 7px;
+  padding: 10px 14px;
+  cursor: pointer;
+  font-size: 14px;
+}
 
-    .hero p {
-      color: #667085;
-      font-size: 18px;
-    }
+nav button {
+  background: transparent;
+  color: white;
+}
 
-    .search {
-      width: 90%;
-      max-width: 600px;
-      padding: 15px;
-      border: 1px solid #ddd;
-      border-radius: 30px;
-      font-size: 16px;
-      margin-top: 20px;
-    }
+nav button:hover {
+  background: #374151;
+}
 
-    section {
-      padding: 35px 5%;
-    }
+main {
+  max-width: 1100px;
+  margin: auto;
+  padding: 25px 15px;
+}
 
-    section h2 {
-      text-align: center;
-    }
+.hero {
+  background: white;
+  text-align: center;
+  padding: 45px 20px;
+  border-radius: 15px;
+  margin-bottom: 25px;
+}
 
-    .categories {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
+.hero h1 {
+  font-size: 38px;
+  margin: 10px;
+}
 
-    .category {
-      background: white;
-      border: 1px solid #ddd;
-      padding: 12px 18px;
-      border-radius: 25px;
-      cursor: pointer;
-    }
+.hero p {
+  color: #667085;
+}
 
-    .products {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 18px;
-      max-width: 1100px;
-      margin: auto;
-    }
+.search {
+  width: 90%;
+  max-width: 600px;
+  padding: 14px;
+  border: 1px solid #ddd;
+  border-radius: 25px;
+  font-size: 16px;
+}
 
-    .product {
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 3px 12px #ddd;
-      text-align: center;
-    }
+.categories {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 20px 0;
+}
 
-    .product-icon {
-      font-size: 55px;
-    }
+.category {
+  background: white;
+  border: 1px solid #ddd;
+}
 
-    .price {
-      font-weight: bold;
-      font-size: 20px;
-      margin: 10px;
-    }
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 18px;
+}
 
-    .buy {
-      background: #111827;
-      color: white;
-      border: 0;
-      padding: 10px 18px;
-      border-radius: 7px;
-      cursor: pointer;
-    }
+.product {
+  background: white;
+  padding: 18px;
+  border-radius: 12px;
+  box-shadow: 0 3px 12px #ddd;
+}
 
-    .ai {
-      position: fixed;
-      right: 20px;
-      bottom: 20px;
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      background: #111827;
-      color: white;
-      border: 0;
-      font-size: 25px;
-      cursor: pointer;
-      box-shadow: 0 4px 15px #999;
-    }
+.product-icon {
+  font-size: 55px;
+  text-align: center;
+}
 
-    .box {
-      max-width: 420px;
-      margin: 40px auto;
-      background: white;
-      padding: 25px;
-      border-radius: 12px;
-      box-shadow: 0 3px 15px #ddd;
-      text-align: center;
-    }
+.product h3 {
+  margin-bottom: 5px;
+}
 
-    .box input {
-      width: 100%;
-      padding: 13px;
-      margin: 8px 0;
-      border: 1px solid #ddd;
-      border-radius: 7px;
-    }
+.price {
+  font-size: 19px;
+  font-weight: bold;
+  margin: 10px 0;
+}
 
-    .message {
-      margin-top: 15px;
-    }
+.primary {
+  background: #111827;
+  color: white;
+}
 
-    footer {
-      background: #111827;
-      color: white;
-      text-align: center;
-      padding: 25px;
-      margin-top: 30px;
-    }
-  </style>
+.secondary {
+  background: #e5e7eb;
+}
+
+.card {
+  background: white;
+  max-width: 500px;
+  margin: 20px auto;
+  padding: 25px;
+  border-radius: 14px;
+  box-shadow: 0 3px 15px #ddd;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 12px;
+  margin: 7px 0;
+  border: 1px solid #ddd;
+  border-radius: 7px;
+  font-family: inherit;
+}
+
+.message {
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+.cart-item,
+.order-item {
+  background: white;
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 10px;
+}
+
+.ai-button {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #111827;
+  color: white;
+  font-size: 25px;
+  z-index: 20;
+}
+
+footer {
+  background: #111827;
+  color: white;
+  text-align: center;
+  padding: 25px;
+  margin-top: 30px;
+}
+
+.dark {
+  background: #0f172a;
+  color: #f8fafc;
+}
+
+.dark .hero,
+.dark .product,
+.dark .card,
+.dark .cart-item,
+.dark .order-item {
+  background: #1e293b;
+  color: white;
+}
+
+.dark .category {
+  background: #1e293b;
+  color: white;
+  border-color: #475569;
+}
+
+.dark input,
+.dark select,
+.dark textarea {
+  background: #0f172a;
+  color: white;
+  border-color: #475569;
+}
+</style>
 </head>
 
 <body>
 
 <header>
-  <div class="logo">🚀 Nova Market</div>
+  <div class="top">
 
-  <nav>
-    <button onclick="home()">Home</button>
-    <button onclick="showLogin()">Login</button>
-    <button onclick="showSignup()">Sign Up</button>
-    <button onclick="showCart()">🛒 Cart</button>
-  </nav>
+    <div class="logo">🚀 Nova Market</div>
+
+    <nav>
+      <button onclick="home()">🏠 Home</button>
+      <button onclick="showProducts()">🛍️ Products</button>
+      <button onclick="showCart()">🛒 Cart</button>
+      <button onclick="showFavorites()">❤️ Favorites</button>
+      <button onclick="showOrders()">📦 Orders</button>
+      <button onclick="showLogin()">🔐 Login</button>
+      <button onclick="showSignup()">📝 Sign Up</button>
+      <button onclick="showSeller()">🏪 Sell</button>
+      <button onclick="toggleDark()">🌙</button>
+    </nav>
+
+  </div>
 </header>
 
-<div id="app">
+<main id="app"></main>
 
-  <div class="hero">
-    <h1>Everything You Need. One Market.</h1>
-    <p>Discover products, compare choices and shop with Nova Market.</p>
-
-    <input
-      class="search"
-      id="search"
-      placeholder="🔎 Search products..."
-      onkeyup="searchProducts()">
-  </div>
-
-  <section>
-    <h2>Categories</h2>
-
-    <div class="categories">
-      <button class="category">📱 Electronics</button>
-      <button class="category">👕 Fashion</button>
-      <button class="category">🏠 Home</button>
-      <button class="category">📚 School</button>
-      <button class="category">⚽ Sports</button>
-    </div>
-  </section>
-
-  <section>
-    <h2>Featured Products</h2>
-
-    <div class="products" id="products">
-      <div class="product">
-        <div class="product-icon">📱</div>
-        <h3>Smart Phone</h3>
-        <div class="price">15,000 Birr</div>
-        <button class="buy" onclick="addCart('Smart Phone')">
-          Add to Cart
-        </button>
-      </div>
-
-      <div class="product">
-        <div class="product-icon">🎧</div>
-        <h3>Wireless Headphones</h3>
-        <div class="price">1,500 Birr</div>
-        <button class="buy" onclick="addCart('Wireless Headphones')">
-          Add to Cart
-        </button>
-      </div>
-
-      <div class="product">
-        <div class="product-icon">👟</div>
-        <h3>Running Shoes</h3>
-        <div class="price">2,800 Birr</div>
-        <button class="buy" onclick="addCart('Running Shoes')">
-          Add to Cart
-        </button>
-      </div>
-
-      <div class="product">
-        <div class="product-icon">💻</div>
-        <h3>Laptop</h3>
-        <div class="price">35,000 Birr</div>
-        <button class="buy" onclick="addCart('Laptop')">
-          Add to Cart
-        </button>
-      </div>
-
-    </div>
-  </section>
-
-</div>
-
-<button class="ai" onclick="showAI()">🤖</button>
+<button class="ai-button" onclick="showAI()">🤖</button>
 
 <footer>
+  <b>🚀 Nova Market</b>
+  <p>Buy smarter. Sell better.</p>
   <p>© 2026 Nova Market</p>
-  <p>Buy smarter. Sell better. 🚀</p>
 </footer>
 
 <script>
 
-var cart = [];
+> Tegist:
+var products = [
+  {
+    id: 1,
+    name: "Smart Phone",
+    price: 15000,
+    category: "Electronics",
+    icon: "📱",
+    rating: 5
+  },
+  {
+    id: 2,
+    name: "Wireless Headphones",
+    price: 1500,
+    category: "Electronics",
+    icon: "🎧",
+    rating: 4
+  },
+  {
+    id: 3,
+    name: "Running Shoes",
+    price: 2800,
+    category: "Fashion",
+    icon: "👟",
+    rating: 5
+  },
+  {
+    id: 4,
+    name: "Laptop",
+    price: 35000,
+    category: "Electronics",
+    icon: "💻",
+    rating: 4
+  },
+  {
+    id: 5,
+    name: "School Backpack",
+    price: 1200,
+    category: "School",
+    icon: "🎒",
+    rating: 5
+  },
+  {
+    id: 6,
+    name: "Football",
+    price: 900,
+    category: "Sports",
+    icon: "⚽",
+    rating: 4
+  }
+];
 
-function home() {
-  location.reload();
+var cart = JSON.parse(localStorage.getItem("novaCart") || "[]");
+var favorites = JSON.parse(localStorage.getItem("novaFavorites") || "[]");
+var orders = JSON.parse(localStorage.getItem("novaOrders") || "[]");
+
+function saveData() {
+  localStorage.setItem("novaCart", JSON.stringify(cart));
+  localStorage.setItem("novaFavorites", JSON.stringify(favorites));
+  localStorage.setItem("novaOrders", JSON.stringify(orders));
 }
 
-function addCart(product) {
+function home() {
+
+  document.getElementById("app").innerHTML =
+    '<div class="hero">' +
+    '<h1>Everything You Need. One Market. 🚀</h1>' +
+    '<p>Discover products and shop with Nova Market.</p>' +
+    '<input class="search" id="searchBox" placeholder="🔎 Search products..." onkeyup="searchProducts()">' +
+    '</div>' +
+
+    '<h2>Categories</h2>' +
+
+    '<div class="categories">' +
+    '<button class="category" onclick="filterCategory(\'Electronics\')">📱 Electronics</button>' +
+    '<button class="category" onclick="filterCategory(\'Fashion\')">👕 Fashion</button>' +
+    '<button class="category" onclick="filterCategory(\'School\')">📚 School</button>' +
+    '<button class="category" onclick="filterCategory(\'Sports\')">⚽ Sports</button>' +
+    '</div>' +
+
+    '<h2>🔥 Featured Products</h2>' +
+    '<div class="products" id="productList">' +
+    productHTML(products) +
+    '</div>';
+}
+
+function productHTML(list) {
+
+  if (list.length == 0) {
+    return "<p>No products found.</p>";
+  }
+
+  var html = "";
+
+  for (var i = 0; i < list.length; i++) {
+
+    var p = list[i];
+
+    html +=
+      '<div class="product">' +
+      '<div class="product-icon">' + p.icon + '</div>' +
+      '<h3>' + p.name + '</h3>' +
+      '<p>' + p.category + '</p>' +
+      '<div class="price">' + p.price + ' Birr</div>' +
+      '<p>⭐ ' + p.rating + '/5</p>' +
+      '<button class="primary" onclick="addCart(' + p.id + ')">Add to Cart</button> ' +
+      '<button class="secondary" onclick="favorite(' + p.id + ')">❤️</button>' +
+      '</div>';
+  }
+
+  return html;
+}
+
+function showProducts() {
+  home();
+}
+
+function searchProducts() {
+
+  var word = document.getElementById("searchBox").value.toLowerCase();
+
+  var result = products.filter(function(p) {
+    return p.name.toLowerCase().includes(word) ||
+           p.category.toLowerCase().includes(word);
+  });
+
+  document.getElementById("productList").innerHTML =
+    productHTML(result);
+}
+
+function filterCategory(category) {
+
+  var result = products.filter(function(p) {
+    return p.category == category;
+  });
+
+  document.getElementById("app").innerHTML =
+    "<h2>" + category + "</h2>" +
+    '<div class="products">' +
+    productHTML(result) +
+    "</div>";
+}
+
+function addCart(id) {
+
+  var product = products.find(function(p) {
+    return p.id == id;
+  });
+
   cart.push(product);
-  alert(product + " added to your cart! 🛒");
+
+  saveData();
+
+  alert(product.name + " added to cart! 🛒");
 }
 
 function showCart() {
 
-  var text = "<div class='box'><h2>🛒 Your Cart</h2>";
+  var html = "<h2>🛒 Your Cart</h2>";
 
   if (cart.length == 0) {
-    text += "<p>Your cart is empty.</p>";
+
+    html +=
+      '<div class="card">' +
+      "<p>Your cart is empty.</p>" +
+      "</div>";
+
   } else {
+
+    var total = 0;
+
     for (var i = 0; i < cart.length; i++) {
-      text += "<p>• " + cart[i] + "</p>";
+
+      total += cart[i].price;
+
+> Tegist:
+html +=
+        '<div class="cart-item">' +
+        cart[i].icon + " " +
+        cart[i].name +
+        " — " +
+        cart[i].price +
+        " Birr " +
+        '<button onclick="removeCart(' + i + ')">Remove</button>' +
+        "</div>";
+    }
+
+    html +=
+      '<div class="card">' +
+      "<h3>Total: " + total + " Birr</h3>" +
+      '<button class="primary" onclick="checkout()">Checkout</button>' +
+      "</div>";
+  }
+
+  document.getElementById("app").innerHTML = html;
+}
+
+function removeCart(index) {
+
+  cart.splice(index, 1);
+
+  saveData();
+
+  showCart();
+}
+
+function checkout() {
+
+  if (cart.length == 0) {
+    alert("Your cart is empty.");
+    return;
+  }
+
+  var total = 0;
+
+  for (var i = 0; i < cart.length; i++) {
+    total += cart[i].price;
+  }
+
+  var order = {
+    id: Date.now(),
+    items: cart,
+    total: total,
+    date: new Date().toLocaleString()
+  };
+
+  orders.push(order);
+
+  cart = [];
+
+  saveData();
+
+  document.getElementById("app").innerHTML =
+    '<div class="card">' +
+    "<h2>🎉 Order Placed!</h2>" +
+    "<p>Your order has been saved.</p>" +
+    "<p>Total: " + total + " Birr</p>" +
+    '<button class="primary" onclick="showOrders()">View Orders</button>' +
+    "</div>";
+}
+
+function showFavorites() {
+
+  var list = products.filter(function(p) {
+    return favorites.includes(p.id);
+  });
+
+  document.getElementById("app").innerHTML =
+    "<h2>❤️ Favorites</h2>" +
+    '<div class="products">' +
+    productHTML(list) +
+    "</div>";
+}
+
+function favorite(id) {
+
+  if (favorites.includes(id)) {
+
+    favorites = favorites.filter(function(x) {
+      return x != id;
+    });
+
+    alert("Removed from favorites.");
+
+  } else {
+
+    favorites.push(id);
+
+    alert("Added to favorites! ❤️");
+  }
+
+  saveData();
+}
+
+function showOrders() {
+
+  var html = "<h2>📦 Your Orders</h2>";
+
+  if (orders.length == 0) {
+
+    html +=
+      '<div class="card"><p>No orders yet.</p></div>';
+
+  } else {
+
+    for (var i = 0; i < orders.length; i++) {
+
+      html +=
+        '<div class="order-item">' +
+        "<b>Order #" + orders[i].id + "</b>" +
+        "<p>Total: " + orders[i].total + " Birr</p>" +
+        "<p>" + orders[i].date + "</p>" +
+        "</div>";
     }
   }
 
-  text += "<button class='buy' onclick='home()'>Continue Shopping</button>";
-  text += "</div>";
-
-  document.getElementById("app").innerHTML = text;
+  document.getElementById("app").innerHTML = html;
 }
 
 function showSignup() {
 
   document.getElementById("app").innerHTML =
-    "<div class='box'>" +
-    "<h2>📝 Create Your Nova Account</h2>" +
+    '<div class="card">' +
+    "<h2>📝 Create Account</h2>" +
 
-    "<input id='name' placeholder='Your name'>" +
-    "<input id='email' placeholder='Email'>" +
-    "<input id='password' type='password' placeholder='Password'>" +
+    '<input id="signupName" placeholder="Name">' +
+    '<input id="signupEmail" placeholder="Email">' +
+    '<input id="signupPassword" type="password" placeholder="Password">' +
 
-    "<button class='buy' onclick='createAccount()'>Create Account</button>" +
+    '<button class="primary" onclick="createAccount()">Create Account</button>' +
 
-    "<div class='message' id='message'></div>" +
+    '<div id="signupMessage" class="message"></div>' +
     "</div>";
 }
 
 function createAccount() {
 
-  var name = document.getElementById("name").value;
-  var email = document.getElementById("email").value;
-  var password = document.getElementById("password").value;
+  var name = document.getElementById("signupName").value;
+  var email = document.getElementById("signupEmail").value;
+  var password = document.getElementById("signupPassword").value;
 
-  if (name == "" ⠟⠟⠟⠵⠞⠺⠺⠟⠵⠟⠵⠟⠟ password == "") {
+  if (!name ⠺⠵⠟⠟⠞⠺⠞⠵ !password) {
 
-    document.getElementById("message").innerHTML =
-      "Please fill in all fields.";
+    document.getElementById("signupMessage").innerHTML =
+      "Please fill in everything.";
 
     return;
   }
@@ -326,24 +597,24 @@ function createAccount() {
   localStorage.setItem("novaName", name);
   localStorage.setItem("novaEmail", email);
   localStorage.setItem("novaPassword", password);
+  localStorage.setItem("novaLogged", "yes");
 
-  document.getElementById("message").innerHTML =
-    "Account created successfully! 🎉";
-
+  document.getElementById("signupMessage").innerHTML =
+    "Account created! 🎉";
 }
 
 function showLogin() {
 
   document.getElementById("app").innerHTML =
-    "<div class='box'>" +
+    '<div class="card">' +
     "<h2>🔐 Login</h2>" +
 
-    "<input id='loginEmail' placeholder='Email'>" +
-    "<input id='loginPassword' type='password' placeholder='Password'>" +
+    '<input id="loginEmail" placeholder="Email">' +
+    '<input id="loginPassword" type="password" placeholder="Password">' +
 
-    "<button class='buy' onclick='loginAccount()'>Login</button>" +
+    '<button class="primary" onclick="loginAccount()">Login</button>' +
 
-    "<div class='message' id='loginMessage'></div>" +
+    '<div id="loginMessage" class="message"></div>' +
     "</div>";
 }
 
@@ -352,166 +623,160 @@ function loginAccount() {
   var email = document.getElementById("loginEmail").value;
   var password = document.getElementById("loginPassword").value;
 
-  var savedEmail = localStorage.getItem("novaEmail");
-  var savedPassword = localStorage.getItem("novaPassword");
-  var savedName = localStorage.getItem("novaName");
+  if (
+    email == localStorage.getItem("novaEmail") &&
+    password == localStorage.getItem("novaPassword")
+  ) {
 
-  if (email == savedEmail && password == savedPassword) {
+    localStorage.setItem("novaLogged", "yes");
 
-    document.getElementById("loginMessage").innerHTML =
-      "Welcome back, " + savedName + "! 🎉";
+> Tegist:
+document.getElementById("loginMessage").innerHTML =
+      "Welcome back, " +
+      localStorage.getItem("novaName") +
+      "! 🎉";
 
   } else {
 
     document.getElementById("loginMessage").innerHTML =
       "Wrong email or password.";
-
   }
+}
+
+function showSeller() {
+
+  document.getElementById("app").innerHTML =
+    '<div class="card">' +
+    "<h2>🏪 Seller Dashboard</h2>" +
+    "<p>Add a product to your local Nova Market store.</p>" +
+
+    '<input id="sellerName" placeholder="Product name">' +
+    '<input id="sellerPrice" placeholder="Price in Birr" type="number">' +
+
+    '<select id="sellerCategory">' +
+    '<option>Electronics</option>' +
+    '<option>Fashion</option>' +
+    '<option>School</option>' +
+    '<option>Sports</option>' +
+    '<option>Home</option>' +
+    "</select>" +
+
+    '<button class="primary" onclick="addProduct()">Add Product</button>' +
+
+    '<div id="sellerMessage" class="message"></div>' +
+    "</div>";
+}
+
+function addProduct() {
+
+  var name = document.getElementById("sellerName").value;
+  var price = Number(document.getElementById("sellerPrice").value);
+  var category = document.getElementById("sellerCategory").value;
+
+  if (!name || !price) {
+
+    document.getElementById("sellerMessage").innerHTML =
+      "Enter a product name and price.";
+
+    return;
+  }
+
+  products.push({
+    id: Date.now(),
+    name: name,
+    price: price,
+    category: category,
+    icon: "🛍️",
+    rating: 5
+  });
+
+  document.getElementById("sellerMessage").innerHTML =
+    "Product added successfully! 🎉";
 }
 
 function showAI() {
 
   document.getElementById("app").innerHTML =
-    "<div class='box'>" +
+    '<div class="card">' +
     "<h2>🤖 Nova AI</h2>" +
-    "<p>Hi! I'm Nova, your Nova Market assistant.</p>" +
+    "<p>I'm your Nova Market shopping assistant.</p>" +
 
-    "<input id='question' placeholder='Ask Nova anything...'>" +
+    '<input id="aiQuestion" placeholder="Ask Nova AI...">' +
 
-    "<button class='buy' onclick='askNova()'>" +
-    "Ask Nova 🤖" +
-    "</button>" +
+    '<button class="primary" onclick="askAI()">Ask Nova</button>' +
 
-    "<div class='message' id='answer'></div>" +
+    '<div id="aiAnswer" class="message"></div>' +
     "</div>";
-}
-
-
-function askNova() {
-
-  var question =
-    document.getElementById("question").value.toLowerCase();
-
-  var answer =
-    "I'm Nova AI 🤖. Try asking me about phones, laptops, headphones, shoes, school products, prices, or shopping.";
-
-
-  if (question.includes("hello") ||
-      question.includes("hi")) {
-
-    answer =
-      "Hello! 👋 I'm Nova, your shopping assistant. What are you looking for?";
-  }
-
-
-  else if (question.includes("phone")) {
-
-    answer =
-      "📱 We currently have a Smart Phone listed for 15,000 Birr. I can help you compare it with other phones when more products are added.";
-  }
-
-
-  else if (question.includes("laptop")) {
-
-    answer =
-      "💻 Our featured Laptop is listed at 35,000 Birr. It's a good option to consider for school and work.";
-  }
-
-
-  else if (question.includes("headphone")) {
-
-    answer =
-      "🎧 We have Wireless Headphones listed for 1,500 Birr.";
-  }
-
-
-  else if (question.includes("shoe")) {
-
-    answer =
-      "👟 We have Running Shoes listed for 2,800 Birr.";
-  }
-
-
-  else if (question.includes("school")) {
-
-    answer =
-      "📚 For school, I can help you look for laptops, phones, headphones, stationery, and other useful products.";
-  }
-
-
-  else if (question.includes("cheap") ||
-           question.includes("cheapest")) {
-
-    answer =
-      "💰 Our lowest-priced featured product is currently the Wireless Headphones at 1,500 Birr.";
-  }
-
-
-  else if (question.includes("cart")) {
-
-    answer =
-      "🛒 You can use the Cart button at the top to see products you've added.";
-  }
-
-
-  else if (question.includes("who are you") ||
-           question.includes("what are you")) {
-
-    answer =
-      "🤖 I'm Nova AI, the shopping assistant built into Nova Market!";
-  }
-
-
-  document.getElementById("answer").innerHTML = answer;
-}
 }
 
 function askAI() {
 
-  var question =
-    document.getElementById("question").value.toLowerCase();
+  var q =
+    document.getElementById("aiQuestion").value.toLowerCase();
 
   var answer =
-    "I'm still learning! 🤖 Soon I'll help you find the best products on Nova Market.";
+    "🤖 I'm Nova AI. Ask me about products, prices, school items, electronics, fashion, sports, or shopping.";
 
-  if (question.includes("phone")) {
+  if (q.includes("phone")) {
+
     answer =
-      "📱 I can help you compare phones and find one that fits your budget.";
+      "📱 We have a Smart Phone for 15,000 Birr.";
   }
 
-  if (question.includes("school")) {
+  else if (q.includes("laptop")) {
+
     answer =
-      "📚 Check our School category for products useful for students.";
+      "💻 We have a Laptop for 35,000 Birr.";
   }
 
-  if (question.includes("cheap")) {
+  else if (q.includes("headphone")) {
+
     answer =
-      "💰 Tell me what product you want and your budget, and I'll help you choose.";
+      "🎧 Wireless Headphones are 1,500 Birr.";
   }
 
-  document.getElementById("answer").innerHTML = answer;
+  else if (q.includes("shoe")) {
+
+    answer =
+      "👟 Running Shoes are 2,800 Birr.";
+  }
+
+  else if (q.includes("school")) {
+
+    answer =
+      "📚 Try our School category. We currently have a School Backpack for 1,200 Birr.";
+  }
+
+  else if (q.includes("cheap")) {
+
+    answer =
+      "💰 Our cheapest featured product is the Football at 900 Birr.";
+  }
+
+  else if (q.includes("hello") || q.includes("hi")) {
+
+    answer =
+      "👋 Hello! I'm Nova AI. What are you looking for today?";
+  }
+
+  document.getElementById("aiAnswer").innerHTML = answer;
 }
 
-function searchProducts() {
+function toggleDark() {
 
-  var search =
-    document.getElementById("search").value.toLowerCase();
+  document.body.classList.toggle("dark");
 
-  var products =
-    document.getElementsByClassName("product");
-
-  for (var i = 0; i < products.length; i++) {
-
-    var name =
-      products[i].innerText.toLowerCase();
-
-    if (name.includes(search)) {
-      products[i].style.display = "block";
-    } else {
-      products[i].style.display = "none";
-    }
-  }
+  localStorage.setItem(
+    "novaDark",
+    document.body.classList.contains("dark")
+  );
 }
+
+if (localStorage.getItem("novaDark") == "true") {
+  document.body.classList.add("dark");
+}
+
+home();
 
 </script>
 
