@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>NovaMarket</title>
+
+<style>
+.logo {
+    text-align: center;
+    padding: 10px;
+}
+
+.logo-symbol {
+    width: 110px;
+    height: 110px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 5px;
+    transform: rotate(-3deg);
+}
+
+.block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    color: white;
+    font-size: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px #777;
+}
+
+.one {
+    background: #ff6600;
+}
+
+.two {
+    background: #333333;
+}
+
+.three {
+    background: #555555;
+}
+
+.four {
+    background: #ff6600;
+    font-size: 18px;
+}
+
+.logo-name {
+    margin-top: 15px;
+    font-size: 25px;
+    font-weight: bold;
+    letter-spacing: 4px;
+    color: #333;
+}
+
+.logo-tag {
+    font-size: 11px;
+    letter-spacing: 3px;
+    margin-top: 5px;
+    color: #555;
+}
+.logo-mark {
+    display: inline-block;
+    background: #ff6600;
+    color: white;
+    padding: 12px 18px;
+    border-radius: 12px;
+    font-size: 28px;
+    font-weight: bold;
+    box-shadow: 0 3px 8px #777;
+}
+
+.logo-mark span {
+    margin-right: 8px;
+}
+
+.logo-mark b {
+    background: white;
+    color: #333;
+    padding: 3px 6px;
+    border-radius: 5px;
+    font-size: 18px;
+}
+
+.logo-name {
+    margin-top: 8px;
+    font-size: 22px;
+    font-weight: bold;
+    letter-spacing: 3px;
+}
+body {
+    margin: 0;
+    font-family: Arial;
+    background: grey;
+}
+
+header {
+    background: orange;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+nav {
+    background: white;
+    text-align: center;
+    padding: 15px;
+}
+
+button {
+    padding: 10px;
+    margin: 5px;
+}
+
+.product {
+    background: white;
+    width: 220px;
+    margin: 20px auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.price {
+    color: orange;
+    font-weight: bold;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+<div class="logo">
+
+    <div class="logo-symbol">
+
+        <div class="block one">N</div>
+        <div class="block two">M</div>
+        <div class="block three">1</div>
+        <div class="block four">00</div>
+
+    </div>
+
+    <div class="logo-name">
+        NOVAMARKET
+    </div>
+
+    <div class="logo-tag">
+        BUY • SELL • DISCOVER
+    </div>
+
+</div>
+
+<p>Buy • Sell • Discover</p>
+
+</header>
+
+
+<nav>
+
+<button onclick="home()">Home</button>
+
+<button onclick="sell()">Sell Product</button>
+
+<div id="sellBox" style="display:none;background:white;padding:20px;text-align:center">
+
+<h2>?? Sell Your Product</h2>
+
+<input id="productName" placeholder="Product name">
+
+<br><br>
+
+<input id="productPrice" placeholder="Price in Birr">
+
+<br><br>
+
+<button onclick="publishProduct()">Publish Product</button>
+
+</div>
+
+<button onclick="login()">Login</button>
+
+<button onclick="signup()">Sign Up</button>
+
+<button onclick="cart()">?? Cart</button>
+
+</nav>
+
+
+<h2 style="text-align:center">
+Products
+</h2>
+
+
+<div class="product">
+
+<h2>?? Headphones</h2>
+
+<p class="price">1500 Birr</p>
+
+<button onclick="addCart()">
+Buy Now
+</button>
+
+</div>
+
+
+<div id="cartBox"
+style="background:white;padding:20px;text-align:center">
+
+<h2>?? Cart</h2>
+
+<p id="cartText">
+Cart is empty.
+</p>
+
+<p id="total">
+Total: 0 Birr
+</p>
+<button onclick="removeItem()">Remove Last Item</button>
+
+<button onclick="checkout()">Checkout</button>
+</div>
+
+
+<script>
+
+var items = 0;
+
+var totalPrice = 0;
+
+
+function addCart() {
+
+items = items + 1;
+
+totalPrice = totalPrice + 1500;
+
+document.getElementById("cartText").innerHTML =
+"?? Headphones x " + items;
+
+document.getElementById("total").innerHTML =
+"Total: " + totalPrice + " Birr";
+
+}
+
+
+function home() {
+
+alert("Home");
+
+}
+
+
+function sell() {
+
+document.getElementById("sellBox").style.display = "block";
+
+}
+
+function login() {
+
+alert("Login");
+
+}
+
+
+function signup() {
+
+alert("Sign Up");
+
+}
+
+
+function cart() {
+
+document.getElementById("cartBox")
+.scrollIntoView();
+
+}
+function publishProduct() {
+
+var name =
+document.getElementById("productName").value;
+
+var price =
+document.getElementById("productPrice").value;
+
+if (name == "" || price == "") {
+
+alert("Enter the product name and price.");
+
+return;
+
+}
+
+var newProduct =
+document.createElement("div");
+
+newProduct.className = "product";
+
+newProduct.innerHTML =
+
+"<h2>?? " + name + "</h2>" +
+
+"<p class='price'>" +
+price + " Birr</p>" +
+
+"<button onclick='buyNewProduct(" +
+price + ")'>Buy Now</button>";
+
+document.body.appendChild(newProduct);
+
+document.getElementById("productName").value = "";
+
+document.getElementById("productPrice").value = "";
+
+alert("?? Product published!");
+
+}
+
+function buyNewProduct(price) {
+
+items = items + 1;
+
+totalPrice = totalPrice + Number(price);
+
+document.getElementById("cartText").innerHTML =
+"Items in cart: " + items;
+
+document.getElementById("total").innerHTML =
+"Total: " + totalPrice + " Birr";
+
+document.getElementById("cartBox").scrollIntoView();
+
+}
+function removeItem() {
+
+if (items > 0) {
+
+items = items - 1;
+
+totalPrice = totalPrice - 1500;
+
+}
+
+document.getElementById("cartText").innerHTML =
+items == 0
+? "Cart is empty."
+: "Items in cart: " + items;
+
+document.getElementById("total").innerHTML =
+"Total: " + totalPrice + " Birr";
+
+}
+
+
+function checkout() {
+
+if (items == 0) {
+
+alert("Your cart is empty.");
+
+} else {
+
+alert(
+"?? Order created!\nTotal: " +
+totalPrice +
+" Birr"
+);
+
+}
+
+}
+</script>
+
+
+</body>
+</html>
