@@ -1,176 +1,47 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Nova Market</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f5f6fa;
-    }
-
-    header {
-      background: #111827;
-      color: white;
-      padding: 18px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    header h1 {
-      margin: 0;
-    }
-
-    nav button {
-      margin-left: 6px;
-      padding: 9px 12px;
-      border: 0;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-
-    main {
-      padding: 30px 15px;
-      text-align: center;
-    }
-
-    .box {
-      max-width: 400px;
-      margin: 30px auto;
-      background: white;
-      padding: 25px;
-      border-radius: 12px;
-      box-shadow: 0 3px 15px #ddd;
-    }
-
-    input {
-      width: 90%;
-      padding: 12px;
-      margin: 8px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-    }
-
-    .action {
-      background: #111827;
-      color: white;
-      padding: 12px 25px;
-      border: 0;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-
-    #message {
-      margin-top: 15px;
-      font-weight: bold;
-    }
-  </style>
+<title>Nova Market</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body{margin:0;font-family:Arial;background:#f4f4f4}
+header{background:#111;color:white;padding:20px;text-align:center}
+button{padding:12px 20px;margin:5px;border:0;border-radius:6px;background:white;color:#111;cursor:pointer}
+main{text-align:center;padding:30px}
+.box{background:white;padding:25px;max-width:350px;margin:auto;border-radius:10px}
+input{display:block;width:90%;padding:12px;margin:10px auto}
+</style>
 </head>
 
 <body>
 
 <header>
-  <h1>🚀 Nova Market</h1>
-
-  <nav>
-    <button onclick="home()">Home</button>
-    <button onclick="login()">Login</button>
-    <button onclick="signup()">Sign Up</button>
-  </nav>
+<h1>🚀 Nova Market</h1>
+<button onclick="showHome()">Home</button>
+<button onclick="showLogin()">Login</button>
+<button onclick="showSignup()">Sign Up</button>
 </header>
 
-<main id="content">
-  <h2>Welcome to Nova Market 🛒</h2>
-  <p>Buy and sell amazing products.</p>
+<main id="page">
+<h2>Welcome to Nova Market 🛒</h2>
+<p>Buy and sell amazing products.</p>
 </main>
 
 <script>
-
-function home() {
-  document.getElementById("content").innerHTML =
-    "<h2>Welcome to Nova Market 🛒</h2>" +
-    "<p>Buy and sell amazing products.</p>";
+function showHome(){
+document.getElementById("page").innerHTML =
+"<h2>Welcome Home 🏠</h2><p>Welcome to Nova Market!</p>";
 }
 
-function signup() {
-  document.getElementById("content").innerHTML = 
-    <div class="box">
-      <h2>Create Account</h2>
-
-      <input id="signupName" type="text" placeholder="Your name">
-      <input id="signupEmail" type="email" placeholder="Email">
-      <input id="signupPassword" type="password" placeholder="Password">
-
-      <br>
-
-      <button class="action" onclick="createAccount()">
-        Sign Up
-      </button>
-
-      <div id="message"></div>
-    </div>
-  ;
+function showLogin(){
+document.getElementById("page").innerHTML =
+'<div class="box"><h2>Login 🔐</h2><input placeholder="Email"><input type="password" placeholder="Password"><button onclick="alert(\'Login button works!\')">Login</button></div>';
 }
 
-function createAccount() {
-  let name = document.getElementById("signupName").value;
-  let email = document.getElementById("signupEmail").value;
-  let password = document.getElementById("signupPassword").value;
-
-  if (name === "" ⠟⠺⠟⠟⠟⠟⠞⠵⠞⠺⠞⠟⠟⠵ password === "") {
-    document.getElementById("message").innerText =
-      "Please fill everything.";
-    return;
-  }
-
-  localStorage.setItem("novaName", name);
-  localStorage.setItem("novaEmail", email);
-  localStorage.setItem("novaPassword", password);
-
-  document.getElementById("message").innerText =
-    "Account created! 🎉";
-
-  setTimeout(login, 1000);
+function showSignup(){
+document.getElementById("page").innerHTML =
+'<div class="box"><h2>Create Account 📝</h2><input placeholder="Name"><input placeholder="Email"><input type="password" placeholder="Password"><button onclick="alert(\'Sign Up button works!\')">Create Account</button></div>';
 }
-
-function login() {
-  document.getElementById("content").innerHTML = 
-    <div class="box">
-      <h2>Login 🔐</h2>
-
-      <input id="loginEmail" type="email" placeholder="Email">
-      <input id="loginPassword" type="password" placeholder="Password">
-
-      <br>
-
-      <button class="action" onclick="checkLogin()">
-        Login
-      </button>
-
-      <div id="message"></div>
-    </div>
-  ;
-}
-
-function checkLogin() {
-  let email = document.getElementById("loginEmail").value;
-  let password = document.getElementById("loginPassword").value;
-
-  let savedEmail = localStorage.getItem("novaEmail");
-  let savedPassword = localStorage.getItem("novaPassword");
-  let savedName = localStorage.getItem("novaName");
-
-  if (email === savedEmail && password === savedPassword) {
-    document.getElementById("message").innerText =
-      "Welcome back, " + savedName + "! 🎉";
-  } else {
-    document.getElementById("message").innerText =
-      "Wrong email or password.";
-  }
-}
-
 </script>
 
 </body>
