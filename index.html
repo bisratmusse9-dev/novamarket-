@@ -5,65 +5,169 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: #f2f4f7;
+      background: #f5f7fb;
+      color: #172033;
     }
 
     header {
       background: #111827;
       color: white;
-      text-align: center;
-      padding: 25px 10px;
+      padding: 18px 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
     }
 
-    header h1 {
-      margin: 0 0 15px;
-      font-size: 30px;
+    .logo {
+      font-size: 25px;
+      font-weight: bold;
     }
 
     nav button {
-      padding: 10px 18px;
-      margin: 4px;
+      background: transparent;
+      color: white;
       border: 0;
-      border-radius: 7px;
+      padding: 9px 12px;
       cursor: pointer;
       font-size: 15px;
     }
 
-    main {
-      padding: 35px 15px;
+    .hero {
+      padding: 55px 20px;
+      text-align: center;
+      background: white;
+    }
+
+    .hero h1 {
+      font-size: 40px;
+      margin: 10px;
+    }
+
+    .hero p {
+      color: #667085;
+      font-size: 18px;
+    }
+
+    .search {
+      width: 90%;
+      max-width: 600px;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 30px;
+      font-size: 16px;
+      margin-top: 20px;
+    }
+
+    section {
+      padding: 35px 5%;
+    }
+
+    section h2 {
       text-align: center;
     }
 
-    .card {
+    .categories {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .category {
       background: white;
-      max-width: 400px;
-      margin: 25px auto;
-      padding: 25px;
+      border: 1px solid #ddd;
+      padding: 12px 18px;
+      border-radius: 25px;
+      cursor: pointer;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 18px;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .product {
+      background: white;
+      padding: 20px;
       border-radius: 12px;
-      box-shadow: 0 3px 12px #ccc;
+      box-shadow: 0 3px 12px #ddd;
+      text-align: center;
     }
 
-    input {
-      width: 90%;
-      padding: 12px;
-      margin: 8px;
-      box-sizing: border-box;
-      border: 1px solid #ccc;
-      border-radius: 6px;
+    .product-icon {
+      font-size: 55px;
     }
 
-    .submit {
+    .price {
+      font-weight: bold;
+      font-size: 20px;
+      margin: 10px;
+    }
+
+    .buy {
       background: #111827;
       color: white;
-      padding: 12px 25px;
+      border: 0;
+      padding: 10px 18px;
+      border-radius: 7px;
+      cursor: pointer;
+    }
+
+    .ai {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: #111827;
+      color: white;
+      border: 0;
+      font-size: 25px;
+      cursor: pointer;
+      box-shadow: 0 4px 15px #999;
+    }
+
+    .box {
+      max-width: 420px;
+      margin: 40px auto;
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 3px 15px #ddd;
+      text-align: center;
+    }
+
+    .box input {
+      width: 100%;
+      padding: 13px;
+      margin: 8px 0;
+      border: 1px solid #ddd;
+      border-radius: 7px;
     }
 
     .message {
       margin-top: 15px;
-      font-weight: bold;
+    }
+
+    footer {
+      background: #111827;
+      color: white;
+      text-align: center;
+      padding: 25px;
+      margin-top: 30px;
     }
   </style>
 </head>
@@ -71,50 +175,138 @@
 <body>
 
 <header>
-
-  <h1>🚀 Nova Market</h1>
+  <div class="logo">🚀 Nova Market</div>
 
   <nav>
-    <button type="button" onclick="home()">Home</button>
-    <button type="button" onclick="login()">Login</button>
-    <button type="button" onclick="signup()">Sign Up</button>
+    <button onclick="home()">Home</button>
+    <button onclick="showLogin()">Login</button>
+    <button onclick="showSignup()">Sign Up</button>
+    <button onclick="showCart()">🛒 Cart</button>
   </nav>
-
 </header>
 
-<main id="content">
+<div id="app">
 
-  <h2>Welcome to Nova Market 🛒</h2>
-  <p>Your online marketplace.</p>
+  <div class="hero">
+    <h1>Everything You Need. One Market.</h1>
+    <p>Discover products, compare choices and shop with Nova Market.</p>
 
-</main>
+    <input
+      class="search"
+      id="search"
+      placeholder="🔎 Search products..."
+      onkeyup="searchProducts()">
+  </div>
+
+  <section>
+    <h2>Categories</h2>
+
+    <div class="categories">
+      <button class="category">📱 Electronics</button>
+      <button class="category">👕 Fashion</button>
+      <button class="category">🏠 Home</button>
+      <button class="category">📚 School</button>
+      <button class="category">⚽ Sports</button>
+    </div>
+  </section>
+
+  <section>
+    <h2>Featured Products</h2>
+
+    <div class="products" id="products">
+      <div class="product">
+        <div class="product-icon">📱</div>
+        <h3>Smart Phone</h3>
+        <div class="price">15,000 Birr</div>
+        <button class="buy" onclick="addCart('Smart Phone')">
+          Add to Cart
+        </button>
+      </div>
+
+      <div class="product">
+        <div class="product-icon">🎧</div>
+        <h3>Wireless Headphones</h3>
+        <div class="price">1,500 Birr</div>
+        <button class="buy" onclick="addCart('Wireless Headphones')">
+          Add to Cart
+        </button>
+      </div>
+
+      <div class="product">
+        <div class="product-icon">👟</div>
+        <h3>Running Shoes</h3>
+        <div class="price">2,800 Birr</div>
+        <button class="buy" onclick="addCart('Running Shoes')">
+          Add to Cart
+        </button>
+      </div>
+
+      <div class="product">
+        <div class="product-icon">💻</div>
+        <h3>Laptop</h3>
+        <div class="price">35,000 Birr</div>
+        <button class="buy" onclick="addCart('Laptop')">
+          Add to Cart
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+</div>
+
+<button class="ai" onclick="showAI()">🤖</button>
+
+<footer>
+  <p>© 2026 Nova Market</p>
+  <p>Buy smarter. Sell better. 🚀</p>
+</footer>
 
 <script>
 
+var cart = [];
+
 function home() {
-
-  document.getElementById("content").innerHTML =
-    "<h2>Welcome to Nova Market 🏠</h2>" +
-    "<p>Find amazing products here.</p>";
-
+  location.reload();
 }
 
-function signup() {
+function addCart(product) {
+  cart.push(product);
+  alert(product + " added to your cart! 🛒");
+}
 
-  document.getElementById("content").innerHTML =
-    '<div class="card">' +
-    '<h2>Create Account 📝</h2>' +
+function showCart() {
 
-    '<input id="name" placeholder="Name">' +
-    '<input id="email" placeholder="Email">' +
-    '<input id="password" type="password" placeholder="Password">' +
+  var text = "<div class='box'><h2>🛒 Your Cart</h2>";
 
-    '<button class="submit" type="button" onclick="createAccount()">Create Account</button>' +
+  if (cart.length == 0) {
+    text += "<p>Your cart is empty.</p>";
+  } else {
+    for (var i = 0; i < cart.length; i++) {
+      text += "<p>• " + cart[i] + "</p>";
+    }
+  }
 
-    '<div id="message" class="message"></div>' +
+  text += "<button class='buy' onclick='home()'>Continue Shopping</button>";
+  text += "</div>";
 
-    '</div>';
+  document.getElementById("app").innerHTML = text;
+}
 
+function showSignup() {
+
+  document.getElementById("app").innerHTML =
+    "<div class='box'>" +
+    "<h2>📝 Create Your Nova Account</h2>" +
+
+    "<input id='name' placeholder='Your name'>" +
+    "<input id='email' placeholder='Email'>" +
+    "<input id='password' type='password' placeholder='Password'>" +
+
+    "<button class='buy' onclick='createAccount()'>Create Account</button>" +
+
+    "<div class='message' id='message'></div>" +
+    "</div>";
 }
 
 function createAccount() {
@@ -123,13 +315,12 @@ function createAccount() {
   var email = document.getElementById("email").value;
   var password = document.getElementById("password").value;
 
-  if (name == "" ⠞⠟⠞⠟⠟⠵⠞⠵⠺⠺⠞⠺⠟ password == "") {
+  if (name == "" ⠟⠟⠟⠵⠞⠺⠺⠟⠵⠟⠵⠟⠟ password == "") {
 
     document.getElementById("message").innerHTML =
       "Please fill in all fields.";
 
     return;
-
   }
 
   localStorage.setItem("novaName", name);
@@ -137,28 +328,26 @@ function createAccount() {
   localStorage.setItem("novaPassword", password);
 
   document.getElementById("message").innerHTML =
-    "Account created! 🎉";
+    "Account created successfully! 🎉";
 
 }
 
-function login() {
+function showLogin() {
 
-  document.getElementById("content").innerHTML =
-    '<div class="card">' +
-    '<h2>Login 🔐</h2>' +
+  document.getElementById("app").innerHTML =
+    "<div class='box'>" +
+    "<h2>🔐 Login</h2>" +
 
-    '<input id="loginEmail" placeholder="Email">' +
-    '<input id="loginPassword" type="password" placeholder="Password">' +
+    "<input id='loginEmail' placeholder='Email'>" +
+    "<input id='loginPassword' type='password' placeholder='Password'>" +
 
-    '<button class="submit" type="button" onclick="checkLogin()">Login</button>' +
+    "<button class='buy' onclick='loginAccount()'>Login</button>" +
 
-    '<div id="message" class="message"></div>' +
-
-    '</div>';
-
+    "<div class='message' id='loginMessage'></div>" +
+    "</div>";
 }
 
-function checkLogin() {
+function loginAccount() {
 
   var email = document.getElementById("loginEmail").value;
   var password = document.getElementById("loginPassword").value;
@@ -169,16 +358,73 @@ function checkLogin() {
 
   if (email == savedEmail && password == savedPassword) {
 
-    document.getElementById("message").innerHTML =
+    document.getElementById("loginMessage").innerHTML =
       "Welcome back, " + savedName + "! 🎉";
 
   } else {
 
-    document.getElementById("message").innerHTML =
+    document.getElementById("loginMessage").innerHTML =
       "Wrong email or password.";
 
   }
+}
 
+function showAI() {
+  document.getElementById("app").innerHTML =
+    "<div class='box'>" +
+    "<h2>🤖 Nova AI</h2>" +
+    "<p>Hi! I'm Nova AI. Ask me what you want to find.</p>" +
+    "<input id='question' placeholder='Ask Nova AI...'>" +
+    "<button class='buy' onclick='askAI()'>Ask Nova</button>" +
+    "<div class='message' id='answer'></div>" +
+    "</div>";
+}
+
+function askAI() {
+
+  var question =
+    document.getElementById("question").value.toLowerCase();
+
+  var answer =
+    "I'm still learning! 🤖 Soon I'll help you find the best products on Nova Market.";
+
+  if (question.includes("phone")) {
+    answer =
+      "📱 I can help you compare phones and find one that fits your budget.";
+  }
+
+  if (question.includes("school")) {
+    answer =
+      "📚 Check our School category for products useful for students.";
+  }
+
+  if (question.includes("cheap")) {
+    answer =
+      "💰 Tell me what product you want and your budget, and I'll help you choose.";
+  }
+
+  document.getElementById("answer").innerHTML = answer;
+}
+
+function searchProducts() {
+
+  var search =
+    document.getElementById("search").value.toLowerCase();
+
+  var products =
+    document.getElementsByClassName("product");
+
+  for (var i = 0; i < products.length; i++) {
+
+    var name =
+      products[i].innerText.toLowerCase();
+
+    if (name.includes(search)) {
+      products[i].style.display = "block";
+    } else {
+      products[i].style.display = "none";
+    }
+  }
 }
 
 </script>
