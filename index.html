@@ -777,6 +777,389 @@ if (localStorage.getItem("novaDark") == "true") {
 }
 
 home();
+> Tegist:
+<script>
+
+var products = [
+  {id:1,name:"Smart Phone",price:15000,category:"Electronics",icon:"📱",rating:5},
+  {id:2,name:"Wireless Headphones",price:1500,category:"Electronics",icon:"🎧",rating:4},
+  {id:3,name:"Running Shoes",price:2800,category:"Fashion",icon:"👟",rating:5},
+  {id:4,name:"Laptop",price:35000,category:"Electronics",icon:"💻",rating:4},
+  {id:5,name:"School Backpack",price:1200,category:"School",icon:"🎒",rating:5},
+  {id:6,name:"Football",price:900,category:"Sports",icon:"⚽",rating:4}
+];
+
+var cart = [];
+var favorites = [];
+var orders = [];
+
+function home() {
+  document.getElementById("app").innerHTML =
+    '<div class="hero">' +
+    '<h1>Everything You Need. One Market. 🚀</h1>' +
+    '<p>Discover products and shop with Nova Market.</p>' +
+    '<input class="search" id="searchBox" placeholder="Search products..." onkeyup="searchProducts()">' +
+    '</div>' +
+    '<h2>Categories</h2>' +
+    '<div class="categories">' +
+    '<button class="category" onclick="filterCategory(\'Electronics\')">📱 Electronics</button>' +
+    '<button class="category" onclick="filterCategory(\'Fashion\')">👕 Fashion</button>' +
+    '<button class="category" onclick="filterCategory(\'School\')">📚 School</button>' +
+    '<button class="category" onclick="filterCategory(\'Sports\')">⚽ Sports</button>' +
+    '</div>' +
+    '<h2>Featured Products</h2>' +
+    '<div class="products" id="productList">' +
+    productHTML(products) +
+    '</div>';
+}
+
+function productHTML(list) {
+
+  var html = "";
+
+  if (list.length == 0) {
+    return "<p>No products found.</p>";
+  }
+
+  for (var i = 0; i < list.length; i++) {
+
+    var p = list[i];
+
+    html +=
+      '<div class="product">' +
+      '<div class="product-icon">' + p.icon + '</div>' +
+      '<h3>' + p.name + '</h3>' +
+      '<p>' + p.category + '</p>' +
+      '<div class="price">' + p.price + ' Birr</div>' +
+      '<p>Rating: ' + p.rating + '/5</p>' +
+      '<button class="primary" onclick="addCart(' + p.id + ')">Add to Cart</button>' +
+      '<button class="secondary" onclick="favorite(' + p.id + ')">❤️</button>' +
+      '</div>';
+  }
+
+  return html;
+}
+
+function showProducts() {
+  home();
+}
+
+function searchProducts() {
+
+  var word = document.getElementById("searchBox").value.toLowerCase();
+  var result = [];
+
+  for (var i = 0; i < products.length; i++) {
+
+    if (
+      products[i].name.toLowerCase().indexOf(word) >= 0 ||
+      products[i].category.toLowerCase().indexOf(word) >= 0
+    ) {
+      result.push(products[i]);
+    }
+  }
+
+  document.getElementById("productList").innerHTML =
+    productHTML(result);
+}
+
+function filterCategory(category) {
+
+  var result = [];
+
+  for (var i = 0; i < products.length; i++) {
+
+    if (products[i].category == category) {
+      result.push(products[i]);
+    }
+  }
+
+  document.getElementById("app").innerHTML =
+    "<h2>" + category + "</h2>" +
+    '<div class="products">' +
+    productHTML(result) +
+    "</div>";
+}
+
+function addCart(id) {
+
+  for (var i = 0; i < products.length; i++) {
+
+    if (products[i].id == id) {
+      cart.push(products[i]);
+
+      alert(products[i].name + " added to cart!");
+      return;
+    }
+  }
+}
+
+function showCart() {
+
+  var html = "<h2>Your Cart 🛒</h2>";
+
+  if (cart.length == 0) {
+
+    html += '<div class="card"><p>Your cart is empty.</p></div>';
+
+  } else {
+
+    var total = 0;
+
+    for (var i = 0; i < cart.length; i++) {
+
+      total += cart[i].price;
+
+      html +=
+        '<div class="cart-item">' +
+        cart[i].icon + " " +
+        cart[i].name + " - " +
+        cart[i].price + " Birr " +
+        '<button onclick="removeCart(' + i + ')">Remove</button>' +
+        "</div>";
+    }
+
+    html +=
+      '<div class="card">' +
+      "<h3>Total: " + total + " Birr</h3>" +
+      '<button class="primary" onclick="checkout()">Checkout</button>' +
+      "</div>";
+  }
+
+  document.getElementById("app").innerHTML = html;
+}
+
+function removeCart(index) {
+
+  cart.splice(index, 1);
+  showCart();
+}
+
+function checkout() {
+
+  if (cart.length == 0) {
+    alert("Your cart is empty.");
+    return;
+  }
+
+> Tegist:
+alert("Order placed successfully! 🎉");
+
+  cart = [];
+
+  showOrders();
+}
+
+function showFavorites() {
+
+  var html = "<h2>Favorites ❤️</h2>";
+
+  if (favorites.length == 0) {
+
+    html += '<div class="card"><p>No favorites yet.</p></div>';
+
+  } else {
+
+    for (var i = 0; i < favorites.length; i++) {
+      html += "<p>" + favorites[i].name + "</p>";
+    }
+  }
+
+  document.getElementById("app").innerHTML = html;
+}
+
+function favorite(id) {
+
+  for (var i = 0; i < products.length; i++) {
+
+    if (products[i].id == id) {
+      favorites.push(products[i]);
+      alert("Added to favorites ❤️");
+      return;
+    }
+  }
+}
+
+function showOrders() {
+
+  document.getElementById("app").innerHTML =
+    '<div class="card">' +
+    "<h2>Orders 📦</h2>" +
+    "<p>Your orders will appear here.</p>" +
+    "</div>";
+}
+
+function showSignup() {
+
+  document.getElementById("app").innerHTML =
+    '<div class="card">' +
+    "<h2>Create Account 📝</h2>" +
+    '<input id="signupName" placeholder="Name">' +
+    '<input id="signupEmail" placeholder="Email">' +
+    '<input id="signupPassword" type="password" placeholder="Password">' +
+    '<button class="primary" onclick="createAccount()">Create Account</button>' +
+    '<div id="signupMessage" class="message"></div>' +
+    "</div>";
+}
+
+function createAccount() {
+
+  var name = document.getElementById("signupName").value;
+  var email = document.getElementById("signupEmail").value;
+  var password = document.getElementById("signupPassword").value;
+
+  if (name == "" ⠵⠟⠺⠞⠺⠞⠟⠞⠺⠵⠞⠞⠵ password == "") {
+
+    document.getElementById("signupMessage").innerHTML =
+      "Please fill in everything.";
+
+    return;
+  }
+
+  localStorage.setItem("novaName", name);
+  localStorage.setItem("novaEmail", email);
+  localStorage.setItem("novaPassword", password);
+
+  document.getElementById("signupMessage").innerHTML =
+    "Account created successfully! 🎉";
+}
+
+function showLogin() {
+
+  document.getElementById("app").innerHTML =
+    '<div class="card">' +
+    "<h2>Login 🔐</h2>" +
+    '<input id="loginEmail" placeholder="Email">' +
+    '<input id="loginPassword" type="password" placeholder="Password">' +
+    '<button class="primary" onclick="loginAccount()">Login</button>' +
+    '<div id="loginMessage" class="message"></div>' +
+    "</div>";
+}
+
+function loginAccount() {
+
+  var email = document.getElementById("loginEmail").value;
+  var password = document.getElementById("loginPassword").value;
+
+  if (
+    email == localStorage.getItem("novaEmail") &&
+    password == localStorage.getItem("novaPassword")
+  ) {
+
+    document.getElementById("loginMessage").innerHTML =
+      "Welcome back! 🎉";
+
+  } else {
+
+    document.getElementById("loginMessage").innerHTML =
+      "Wrong email or password.";
+  }
+}
+
+function showSeller() {
+
+  document.getElementById("app").innerHTML =
+    '<div class="card">' +
+    "<h2>Seller Dashboard 🏪</h2>" +
+    '<input id="sellerName" placeholder="Product name">' +
+    '<input id="sellerPrice" placeholder="Price in Birr">' +
+    '<button class="primary" onclick="addProduct()">Add Product</button>' +
+    '<div id="sellerMessage"></div>' +
+    "</div>";
+}
+
+function addProduct() {
+
+  var name = document.getElementById("sellerName").value;
+  var price = document.getElementById("sellerPrice").value;
+
+  if (name == "" || price == "") {
+
+    document.getElementById("sellerMessage").innerHTML =
+      "Enter the product name and price.";
+
+    return;
+  }
+
+  products.push({
+    id: products.length + 1,
+    name: name,
+    price: price,
+    category: "Other",
+    icon: "🛍️",
+    rating: 5
+  });
+
+  document.getElementById("sellerMessage").innerHTML =
+    "Product added! 🎉";
+}
+
+function showAI() {
+
+  document.getElementById("app").innerHTML =
+    '<div class="card">' +
+    "<h2>Nova AI 🤖</h2>" +
+    "<p>Ask me about Nova Market products.</p>" +
+    '<input id="aiQuestion" placeholder="Ask Nova...">' +
+    '<button class="primary" onclick="askAI()">Ask Nova</button>' +
+    '<div id="aiAnswer" class="message"></div>' +
+    "</div>";
+}
+
+function askAI() {
+
+> Tegist:
+var q =
+    document.getElementById("aiQuestion").value.toLowerCase();
+
+  var answer =
+    "I'm Nova AI 🤖. Ask me about phones, laptops, headphones, shoes, school products, or cheap products.";
+
+  if (q.indexOf("phone") >= 0) {
+    answer = "We have a Smart Phone for 15,000 Birr. 📱";
+  }
+
+  else if (q.indexOf("laptop") >= 0) {
+    answer = "We have a Laptop for 35,000 Birr. 💻";
+  }
+
+  else if (q.indexOf("headphone") >= 0) {
+    answer = "Wireless Headphones cost 1,500 Birr. 🎧";
+  }
+
+  else if (q.indexOf("shoe") >= 0) {
+    answer = "Running Shoes cost 2,800 Birr. 👟";
+  }
+
+  else if (q.indexOf("school") >= 0) {
+    answer = "Our School Backpack costs 1,200 Birr. 🎒";
+  }
+
+  else if (q.indexOf("cheap") >= 0) {
+    answer = "Our cheapest featured product is the Football at 900 Birr. ⚽";
+  }
+
+  else if (
+    q.indexOf("hello") >= 0 ||
+    q.indexOf("hi") >= 0
+  ) {
+    answer = "Hello! 👋 I'm Nova AI. How can I help you?";
+  }
+
+  document.getElementById("aiAnswer").innerHTML =
+    answer;
+}
+
+function toggleDark() {
+
+  if (document.body.className == "dark") {
+    document.body.className = "";
+  } else {
+    document.body.className = "dark";
+  }
+}
+
+home();
 
 </script>
 
