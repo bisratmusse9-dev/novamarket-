@@ -42,6 +42,72 @@ function showSignup(){
 document.getElementById("page").innerHTML =
 '<div class="box"><h2>Create Account 📝</h2><input placeholder="Name"><input placeholder="Email"><input type="password" placeholder="Password"><button onclick="alert(\'Sign Up button works!\')">Create Account</button></div>';
 }
+<script>
+function showHome() {
+  document.getElementById("page").innerHTML =
+    "<h2>Welcome Home 🏠</h2><p>Welcome to Nova Market!</p>";
+}
+
+function showLogin() {
+  document.getElementById("page").innerHTML =
+    '<div class="box">' +
+    '<h2>Login 🔐</h2>' +
+    '<input id="loginEmail" placeholder="Email">' +
+    '<input id="loginPassword" type="password" placeholder="Password">' +
+    '<button onclick="loginAccount()">Login</button>' +
+    '<p id="loginMessage"></p>' +
+    '</div>';
+}
+
+function showSignup() {
+  document.getElementById("page").innerHTML =
+    '<div class="box">' +
+    '<h2>Create Account 📝</h2>' +
+    '<input id="signupName" placeholder="Name">' +
+    '<input id="signupEmail" placeholder="Email">' +
+    '<input id="signupPassword" type="password" placeholder="Password">' +
+    '<button onclick="createAccount()">Create Account</button>' +
+    '<p id="signupMessage"></p>' +
+    '</div>';
+}
+
+function createAccount() {
+  let name = document.getElementById("signupName").value;
+  let email = document.getElementById("signupEmail").value;
+  let password = document.getElementById("signupPassword").value;
+
+  if (!name ⠞⠵⠵⠺⠵⠺⠟⠵ !password) {
+    document.getElementById("signupMessage").innerText =
+      "Please fill in everything.";
+    return;
+  }
+
+  localStorage.setItem("novaName", name);
+  localStorage.setItem("novaEmail", email);
+  localStorage.setItem("novaPassword", password);
+
+  document.getElementById("signupMessage").innerText =
+    "Account created successfully! 🎉";
+
+  setTimeout(showLogin, 1000);
+}
+
+function loginAccount() {
+  let email = document.getElementById("loginEmail").value;
+  let password = document.getElementById("loginPassword").value;
+
+  let savedEmail = localStorage.getItem("novaEmail");
+  let savedPassword = localStorage.getItem("novaPassword");
+  let savedName = localStorage.getItem("novaName");
+
+  if (email === savedEmail && password === savedPassword) {
+    document.getElementById("loginMessage").innerText =
+      "Welcome back, " + savedName + "! 🎉";
+  } else {
+    document.getElementById("loginMessage").innerText =
+      "Email or password is incorrect.";
+  }
+}
 </script>
 
 </body>
